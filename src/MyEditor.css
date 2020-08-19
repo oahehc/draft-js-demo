@@ -1,0 +1,25 @@
+.RichEditor-root {
+  height: 300px;
+  margin: 4px;
+  padding: 4px;
+  border: 1px solid grey;
+}
+
+.RichEditor-controls {
+  width: 100%;
+  display: flex;
+  border-bottom: 1px solid lightgray;
+}
+
+.RichEditor-controls > span {
+  margin: 2px;
+  padding: 2px;
+}
+
+.RichEditor-activeButton {
+  background-color: lightgray;
+}
+
+.DraftEditor-root {
+  margin-top: 8px;
+}
