@@ -5,6 +5,10 @@
   border: 1px solid grey;
 }
 
+.RichEditor-hidePlaceholder .public-DraftEditorPlaceholder-inner {
+  display: none;
+}
+
 .RichEditor-controls {
   width: 100%;
   display: flex;

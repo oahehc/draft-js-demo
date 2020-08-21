@@ -1,4 +1,5 @@
 import React from 'react';
+import { RichUtils } from 'draft-js';
 import StyleButton from './StyleButton';
 
 export const styleMap = {
@@ -22,8 +23,12 @@ const INLINE_STYLES = [
   { label: 'Yellow', style: 'yellow' },
 ];
 
-const InlineStyleControls = props => {
-  const currentStyle = props.editorState.getCurrentInlineStyle();
+const InlineStyleControls = ({ editorState, onChange }) => {
+  const currentStyle = editorState.getCurrentInlineStyle();
+
+  function toggleInlineStyle(inlineStyle) {
+    onChange(RichUtils.toggleInlineStyle(editorState, inlineStyle));
+  }
 
   return (
     <div className="RichEditor-controls">
@@ -32,7 +37,7 @@ const InlineStyleControls = props => {
           key={type.label}
           active={currentStyle.has(type.style)}
           label={type.label}
-          onToggle={props.onToggle}
+          onToggle={toggleInlineStyle}
           style={type.style}
         />
       ))}

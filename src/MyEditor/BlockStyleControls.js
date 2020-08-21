@@ -1,4 +1,5 @@
 import React from 'react';
+import { RichUtils } from 'draft-js';
 import StyleButton from './StyleButton';
 
 export function getBlockStyle(block) {
@@ -23,13 +24,16 @@ const BLOCK_TYPES = [
   { label: 'Code Block', style: 'code-block' },
 ];
 
-const BlockStyleControls = props => {
-  const { editorState } = props;
+const BlockStyleControls = ({ editorState, onChange }) => {
   const selection = editorState.getSelection();
   const blockType = editorState
     .getCurrentContent()
     .getBlockForKey(selection.getStartKey())
     .getType();
+
+  function toggleBlockType(blockType) {
+    onChange(RichUtils.toggleBlockType(editorState, blockType));
+  }
 
   return (
     <div className="RichEditor-controls">
@@ -38,7 +42,7 @@ const BlockStyleControls = props => {
           key={type.label}
           active={type.style === blockType}
           label={type.label}
-          onToggle={props.onToggle}
+          onToggle={toggleBlockType}
           style={type.style}
         />
       ))}
