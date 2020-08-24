@@ -1,4 +1,9 @@
-import { EditorState, convertFromHTML, ContentState } from 'draft-js';
+import {
+  EditorState,
+  convertFromHTML,
+  ContentState,
+  convertToRaw,
+} from 'draft-js';
 
 export default function initContent(html) {
   if (!html || typeof html !== 'string') {
@@ -15,5 +20,14 @@ export default function initContent(html) {
   } catch (error) {
     console.log('initContent error:', error);
     return EditorState.createEmpty();
+  }
+}
+
+export function contentToJs(editorState) {
+  try {
+    return convertToRaw(editorState.getCurrentContent());
+  } catch (error) {
+    console.log('contentToJs error:', error);
+    return [];
   }
 }

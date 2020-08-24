@@ -1,16 +1,17 @@
 import React, { useState, useRef } from 'react';
 import { Editor, RichUtils, getDefaultKeyBinding } from 'draft-js';
-import initContent from './initContent';
+import initContent, { contentToJs } from './initContent';
 import BlockStyleControls, { getBlockStyle } from './BlockStyleControls';
 import InlineStyleControls, { styleMap } from './InlineStyleControls';
+import StateControls from './StateControls';
 import './MyEditor.css';
 
-const sample = '<div>default <span>test</span></div>';
 function MyEditor() {
+  // const [editorState, setEditorState] = useState(initContent('<div>default <span>test</span></div>'));
   const [editorState, setEditorState] = useState(initContent());
 
   function onChange(editorState) {
-    // console.log(editorState.getBlockTree());
+    console.log('--', contentToJs(editorState));
     setEditorState(editorState);
   }
 
@@ -57,6 +58,7 @@ function MyEditor() {
     <div className="RichEditor-root">
       <BlockStyleControls editorState={editorState} onChange={onChange} />
       <InlineStyleControls editorState={editorState} onChange={onChange} />
+      <StateControls editorState={editorState} onChange={onChange} />
       <div className={className} onClick={focus}>
         <Editor
           ref={editorRef}
